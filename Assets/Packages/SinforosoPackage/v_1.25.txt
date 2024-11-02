@@ -1,0 +1,25 @@
+v_1.1 - melhora no script de abrir cenas (tudo centralizado e agora salva o progresso da cena deixada)
+v_1.2 - util para retornar numero randomico (float)
+v_1.3 - script pra abrir cena anterior - scripts colocados na pasta editor
+v_1.4 - ajuste direcaoApontar2D
+v_1.5 - exemplos, script versionamento
+v_1.6 - quadrado arredondado, cg_toggle
+v_1.7 - quadrado, ciculo
+v_1.8 - pasta files, audios basicos
+v_1.9 - sinforoso button
+v_1.10 - produto versao e nome
+v_1.11 - util cg_set
+v_1.12 - pasta criar renderTexture
+v_1.13 - remocao quadrado
+v_1.14 - debug erro
+v_1.15 - pastas novas serao criadas
+v_1.16 - remocao sprite circulo, erroManager corrigido
+v_1.17 - mais pastas para serem criadas
+v_1.18 - atividade criacao (nn funfa)
+v_1.19 - organizacao das pastas - managers gerais adicionados
+v_1.20 - adicao classes
+v_1.21 - gerais, editor (classes e managers), novas pastas no script q cria pastas (avatarMask, lightinSettings e volumeProfiles)
+v_1.22 - sons de passos, normalMaps, gerais
+v_1.23 - mais sons
+v_1.24 - tamanho change, mais sons, util audioSourcePlay, util direcao2D impro, pastas em grupo
+v_1.25 - util funcoes renomeadas (to english), algumas classes renomeadas
