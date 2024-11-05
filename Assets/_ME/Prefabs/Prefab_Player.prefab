@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8991080695708123864}
   - component: {fileID: 1649227746591935264}
   - component: {fileID: 626860770070242602}
+  - component: {fileID: 3173724425332545965}
   m_Layer: 0
   m_Name: Prefab_Player
   m_TagString: Player
@@ -61,7 +62,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -101,6 +102,57 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &3173724425332545965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2288376580644970253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb21d0d6d7b9e3d408e98040f24e1351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  test: 0
+  prefab_stack: {fileID: 8037737492105855096, guid: b038b780976ac1249aba4607d99ecf30,
+    type: 3}
+  list_t_stack: []
+  moveSpeed: 0
+  followSpeed: 10
+  pai_stack: {fileID: 0}
+  t_back: {fileID: 5695246592886210797}
+--- !u!1 &6153035687887325944
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5695246592886210797}
+  m_Layer: 0
+  m_Name: t_back
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5695246592886210797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6153035687887325944}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5193499364228586462}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7006093415229717209
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,6 +183,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6719293689069711557}
+  - {fileID: 5695246592886210797}
   m_Father: {fileID: 1871065356977712925}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &90071013431988399
