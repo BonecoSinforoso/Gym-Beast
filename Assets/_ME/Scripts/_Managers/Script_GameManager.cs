@@ -6,6 +6,7 @@ public class Script_GameManager : MonoBehaviour
 {
     public static Script_GameManager instance;
 
+    [SerializeField] AudioClip[] ac_button;
     [SerializeField] AudioClip[] ac_money;
     [SerializeField] int fps_target;
     [SerializeField] float cam_moveSpeed;
@@ -69,7 +70,12 @@ public class Script_GameManager : MonoBehaviour
         Upgrade_Check();
     }
 
-    public void Audio_Play()
+    public void Ac_Button_Play()
+    {
+        Script_Util.AudioSource_Play(audioSource, ac_button);
+    }
+
+    public void Ac_Money_Play()
     {
         Script_Util.AudioSource_Play(audioSource, ac_money);
     }
@@ -122,6 +128,7 @@ public class Script_GameManager : MonoBehaviour
     public void Upgrade_Buy(int _index)
     {
         player_money -= upgrade[_index].price;
+        Ac_Money_Play();
 
         Txt_Money_Set();
 

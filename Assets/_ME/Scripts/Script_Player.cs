@@ -9,9 +9,11 @@ public class Script_Player : MonoBehaviour
     [SerializeField] float punchForce;
 
     [SerializeField] SkinnedMeshRenderer skmesh_player;
-
     [SerializeField] Transform t_move;
+    [SerializeField] AudioClip[] ac_footstep;
+    
     Animator animator;
+    AudioSource audioSource;
     Rigidbody rb;
 
     Script_Enemy script_Enemy;
@@ -20,6 +22,7 @@ public class Script_Player : MonoBehaviour
     void Start()
     {
         animator = transform.GetComponentInChildren<Animator>();
+        audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
         script_StackController = GetComponent<Script_StackController>();
     }
@@ -32,14 +35,22 @@ public class Script_Player : MonoBehaviour
 
         if (_joyMoved)
         {
+            animator.speed = 1 + ((moveSpeed - 5) / 5);
+
             t_move.eulerAngles = new Vector3(0, -Script_Util.Direction2D_Get(rect_joy_back.position, rect_joy_front.position) + 90, 0);
 
             rb.velocity = t_move.forward * moveSpeed;
         }
         else
         {
+            animator.speed = 1;
             rb.velocity = Vector3.zero;
         }
+    }
+
+    public void Ac_Footstep_Play()
+    {
+        Script_Util.AudioSource_Play(audioSource, ac_footstep);
     }
 
     [SinforosoButton]
@@ -66,6 +77,8 @@ public class Script_Player : MonoBehaviour
 
     public void Action_Punch()
     {
+        animator.SetTrigger("_punch");
+
         script_Enemy.TakePunch(punchForce, script_Enemy.transform.position - transform.position);
 
         Script_GameManager.instance.Area_Punch_Set(false);

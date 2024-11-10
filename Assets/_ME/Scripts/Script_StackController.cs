@@ -69,7 +69,7 @@ public class Script_StackController : MonoBehaviour
 
             Script_GameManager.instance.Player_Money_Set(10);
 
-            Script_GameManager.instance.Audio_Play();
+            Script_GameManager.instance.Ac_Money_Play();
             
             yield return new WaitForSeconds(0.1f);
 
@@ -86,6 +86,7 @@ public class Script_StackController : MonoBehaviour
         Script_GameManager.instance.Txt_Stack_Set(quant_current, quant_max);
     }
 
+    [SinforosoButton]
     public void Quant_Max_Upgrade()
     {
         quant_max++;
