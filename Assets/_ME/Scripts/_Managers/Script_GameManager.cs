@@ -6,6 +6,7 @@ public class Script_GameManager : MonoBehaviour
 {
     public static Script_GameManager instance;
 
+    [SerializeField] AudioClip[] ac_money;
     [SerializeField] int fps_target;
     [SerializeField] float cam_moveSpeed;
     [SerializeField] int player_money;
@@ -27,6 +28,7 @@ public class Script_GameManager : MonoBehaviour
 
     Transform t_cam;
     Transform t_player;
+    AudioSource audioSource;
 
     void Start()
     {
@@ -36,6 +38,7 @@ public class Script_GameManager : MonoBehaviour
 
         t_cam = Camera.main.transform.parent;
         t_player = GameObject.FindGameObjectWithTag("Player").transform;
+        audioSource = GetComponent<AudioSource>();
 
         Area_Collect_Set(false);
         Area_Punch_Set(false);
@@ -64,6 +67,11 @@ public class Script_GameManager : MonoBehaviour
         cg_upgradeShop.interactable = cg_upgradeShop.alpha == 1;
 
         Upgrade_Check();
+    }
+
+    public void Audio_Play()
+    {
+        Script_Util.AudioSource_Play(audioSource, ac_money);
     }
 
     #region textos
@@ -113,13 +121,9 @@ public class Script_GameManager : MonoBehaviour
     #region upgrade
     public void Upgrade_Buy(int _index)
     {
-        //if (player_money < upgrade[_index].price)
-        //{
-        //    Debug.Log("dinheiro insuficiente");
-        //    return;
-        //}
-
         player_money -= upgrade[_index].price;
+
+        Txt_Money_Set();
 
         switch (_index)
         {

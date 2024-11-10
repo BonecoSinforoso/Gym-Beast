@@ -68,6 +68,8 @@ public class Script_StackController : MonoBehaviour
             list_t_stack[i].gameObject.SetActive(false);
 
             Script_GameManager.instance.Player_Money_Set(10);
+
+            Script_GameManager.instance.Audio_Play();
             
             yield return new WaitForSeconds(0.1f);
 
