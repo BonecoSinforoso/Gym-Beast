@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Script_Player : MonoBehaviour
 {
+    #region variaveis
     [SerializeField] RectTransform rect_joy_front;
     [SerializeField] RectTransform rect_joy_back;
 
@@ -18,6 +19,7 @@ public class Script_Player : MonoBehaviour
 
     Script_Enemy script_Enemy;
     Script_StackController script_StackController;
+    #endregion
 
     void Start()
     {
@@ -46,11 +48,6 @@ public class Script_Player : MonoBehaviour
             animator.speed = 1;
             rb.velocity = Vector3.zero;
         }
-    }
-
-    public void Ac_Footstep_Play()
-    {
-        Script_Util.AudioSource_Play(audioSource, ac_footstep);
     }
 
     [SinforosoButton]
@@ -127,4 +124,9 @@ public class Script_Player : MonoBehaviour
         }
     }
     #endregion
+
+    public void Ac_Footstep_Play()
+    {
+        Script_Util.AudioSource_Play(audioSource, ac_footstep);
+    }
 }

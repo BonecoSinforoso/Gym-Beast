@@ -13,7 +13,7 @@ public class Script_Enemy : MonoBehaviour
     {
         Ragdoll_Set(false);
 
-        animator.SetInteger("_value", Random.Range(0, 2));
+        animator.SetInteger("_value", Random.Range(0, 3));
     }
 
     [SinforosoButton]
