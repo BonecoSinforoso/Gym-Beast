@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Script_Enemy : MonoBehaviour
@@ -11,8 +9,13 @@ public class Script_Enemy : MonoBehaviour
         
     }
 
-    void Update()
+    public void Teste()
     {
-        
+
+    }
+
+    void Ragdoll_Set()
+    {
+
     }
 }

@@ -11,6 +11,8 @@ public class Script_Player : MonoBehaviour
     Animator animator;
     Rigidbody rb;
 
+    Script_Enemy script_Enemy;
+
     void Start()
     {
         animator = transform.GetComponentInChildren<Animator>();
@@ -37,7 +39,9 @@ public class Script_Player : MonoBehaviour
 
     public void Action_Punch()
     {
+        script_Enemy.Teste();
 
+        Script_GameManager.instance.Area_Punch_Set(false);
     }
 
     public void Action_Throw()
@@ -53,6 +57,8 @@ public class Script_Player : MonoBehaviour
         if (other.CompareTag("Area_Punch"))
         {
             Script_GameManager.instance.Area_Punch_Set(true);
+
+            script_Enemy = other.GetComponentInParent<Script_Enemy>();
         }
         if (other.CompareTag("Area_Throw"))
         {

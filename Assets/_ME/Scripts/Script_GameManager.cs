@@ -1,12 +1,14 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Script_GameManager : MonoBehaviour
 {
     public static Script_GameManager instance;
 
-    [SerializeField] float cam_moveSpeed;    
+    [SerializeField] int fps_target;
+
+    [SerializeField] float cam_moveSpeed;
     [SerializeField] int player_victimQuant;
     [SerializeField] int player_money;
 
@@ -21,6 +23,8 @@ public class Script_GameManager : MonoBehaviour
     void Start()
     {
         instance = this;
+
+        Application.targetFrameRate = fps_target;
 
         t_cam = Camera.main.transform.parent;
         t_player = GameObject.FindGameObjectWithTag("Player").transform;
