@@ -40,13 +40,18 @@ public class Script_Player : MonoBehaviour
         }
     }
 
+    public void MoveSpeed_Upgrade()
+    {
+        moveSpeed += 5;
+    }
+
+    #region acoes chamadas pelos botoes
     public void Action_Collect()
     {
         script_StackController.Stack_Create();
 
-        Destroy(script_Enemy.gameObject);
-
         Script_GameManager.instance.Area_Collect_Set(false);
+        Destroy(script_Enemy.gameObject);
     }
 
     public void Action_Punch()
@@ -58,8 +63,9 @@ public class Script_Player : MonoBehaviour
 
     public void Action_Throw()
     {
-
+        script_StackController.Call_ThrowRoutine();
     }
+    #endregion
 
     #region Colisao
     void OnTriggerEnter(Collider other)
@@ -69,13 +75,11 @@ public class Script_Player : MonoBehaviour
         if (other.CompareTag("Area_Collect"))
         {
             Script_GameManager.instance.Area_Collect_Set(true);
-
-            script_Enemy = other.GetComponentInParent<Script_Enemy>();
+            script_Enemy = other.GetComponentInParent<Script_Enemy>();            
         }
         if (other.CompareTag("Area_Punch"))
         {
             Script_GameManager.instance.Area_Punch_Set(true);
-
             script_Enemy = other.GetComponentInParent<Script_Enemy>();
         }
         if (other.CompareTag("Area_Throw"))
