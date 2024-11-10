@@ -52,7 +52,12 @@ public class Script_StackController : MonoBehaviour
 
     public void Call_ThrowRoutine()
     {
-        if (quant_current == 0) return;
+        if (quant_current == 0)
+        {
+            Debug.Log("nenhum inimigo empilhado");
+            return;
+        }
+
         StartCoroutine(ThrowRoutine());
     }
 
@@ -79,7 +84,7 @@ public class Script_StackController : MonoBehaviour
         Script_GameManager.instance.Txt_Stack_Set(quant_current, quant_max);
     }
 
-    public void Quant_Max_Increment()
+    public void Quant_Max_Upgrade()
     {
         quant_max++;
         Script_GameManager.instance.Txt_Stack_Set(quant_current, quant_max);

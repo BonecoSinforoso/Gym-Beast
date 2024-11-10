@@ -8,6 +8,8 @@ public class Script_Player : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] float punchForce;
 
+    [SerializeField] SkinnedMeshRenderer skmesh_player;
+
     [SerializeField] Transform t_move;
     Animator animator;
     Rigidbody rb;
@@ -40,9 +42,17 @@ public class Script_Player : MonoBehaviour
         }
     }
 
+    [SinforosoButton]
     public void MoveSpeed_Upgrade()
     {
         moveSpeed += 5;
+    }
+
+    [SinforosoButton]
+    public void ColorChange_Upgrade()
+    {
+        Color _color = new(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+        skmesh_player.material.color = _color;
     }
 
     #region acoes chamadas pelos botoes
@@ -70,7 +80,7 @@ public class Script_Player : MonoBehaviour
     #region Colisao
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
+        //Debug.Log(other.tag);
 
         if (other.CompareTag("Area_Collect"))
         {

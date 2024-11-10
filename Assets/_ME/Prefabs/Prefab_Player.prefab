@@ -52,6 +52,7 @@ MonoBehaviour:
   rect_joy_back: {fileID: 0}
   moveSpeed: 5
   punchForce: 200
+  skmesh_player: {fileID: 14727943288023019}
   t_move: {fileID: 5193499364228586462}
 --- !u!114 &3173724425332545965
 MonoBehaviour:
@@ -193,6 +194,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5193499364228586462}
     m_Modifications:
+    - target: {fileID: 75344998712227652, guid: 43c644ebce2c71a42b8a219fa17ad581,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d4a24f38259a5b7429f7cde87998b2e0, type: 2}
     - target: {fileID: 370007659005050590, guid: 43c644ebce2c71a42b8a219fa17ad581,
         type: 3}
       propertyPath: m_IsActive
@@ -363,6 +369,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43c644ebce2c71a42b8a219fa17ad581, type: 3}
+--- !u!137 &14727943288023019 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 75344998712227652, guid: 43c644ebce2c71a42b8a219fa17ad581,
+    type: 3}
+  m_PrefabInstance: {fileID: 90071013431988399}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6719293689069711557 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6629374649034236010, guid: 43c644ebce2c71a42b8a219fa17ad581,

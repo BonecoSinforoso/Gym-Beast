@@ -10,19 +10,23 @@ public class Script_GameManager : MonoBehaviour
     [SerializeField] float cam_moveSpeed;
     [SerializeField] int player_money;
 
-    [Header("Elementos do canvas")]
+    [Header("Textos")]
     [SerializeField] TextMeshProUGUI txt_fps;
     [SerializeField] TextMeshProUGUI txt_money;
     [SerializeField] TextMeshProUGUI txt_stack;
     [SerializeField] TextMeshProUGUI[] txt_upgrade;
+
+    [Header("Botoes")]
     [SerializeField] Button btn_collect;
     [SerializeField] Button btn_punch;
     [SerializeField] Button btn_throw;
 
+    [Header("Upgrades")]
+    [SerializeField] CanvasGroup cg_upgradeShop;
+    [SerializeField] Upgrade[] upgrade;
+
     Transform t_cam;
     Transform t_player;
-
-    [SerializeField] Upgrade[] upgrade;
 
     void Start()
     {
@@ -53,6 +57,15 @@ public class Script_GameManager : MonoBehaviour
         Txt_Money_Set();
     }
 
+    public void Cg_UpgradeShop_Toggle()
+    {
+        cg_upgradeShop.alpha = cg_upgradeShop.alpha == 0 ? 1 : 0;
+        cg_upgradeShop.blocksRaycasts = cg_upgradeShop.alpha == 1;
+        cg_upgradeShop.interactable = cg_upgradeShop.alpha == 1;
+
+        Upgrade_Check();
+    }
+
     #region textos
     void Txt_Fps_Set()
     {
@@ -75,6 +88,8 @@ public class Script_GameManager : MonoBehaviour
         {
             txt_upgrade[i].text = upgrade[i].title + "\n$" + upgrade[i].price;
         }
+
+        Upgrade_Check();
     }
     #endregion
 
@@ -98,20 +113,21 @@ public class Script_GameManager : MonoBehaviour
     #region upgrade
     public void Upgrade_Buy(int _index)
     {
-        if (player_money < upgrade[_index].price)
-        {
-            Debug.Log("dinheiro insuficiente");
-            return;
-        }
+        //if (player_money < upgrade[_index].price)
+        //{
+        //    Debug.Log("dinheiro insuficiente");
+        //    return;
+        //}
 
         player_money -= upgrade[_index].price;
 
         switch (_index)
         {
             case 0: //mudar cor
+                t_player.GetComponent<Script_Player>().ColorChange_Upgrade();
                 break;
             case 1: //aumentar capacidade
-                t_player.GetComponent<Script_StackController>().Quant_Max_Increment();
+                t_player.GetComponent<Script_StackController>().Quant_Max_Upgrade();
                 break;
             case 2: //aumentar move speed
                 t_player.GetComponent<Script_Player>().MoveSpeed_Upgrade();
@@ -119,6 +135,16 @@ public class Script_GameManager : MonoBehaviour
             default:
                 Debug.Log("upgrade nn encontrado");
                 break;
+        }
+
+        Upgrade_Check();
+    }
+
+    void Upgrade_Check() //verifica se tem o dinheiro suficiente para poder clicar no botao
+    {
+        for (int i = 0; i < upgrade.Length; i++)
+        {
+            txt_upgrade[i].GetComponentInParent<Button>().interactable = player_money >= upgrade[i].price;
         }
     }
     #endregion
