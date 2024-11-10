@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Area_Throw
   - Area_Punch
+  - Area_Collect
   layers:
   - Default
   - TransparentFX

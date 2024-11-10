@@ -13,11 +13,13 @@ public class Script_Player : MonoBehaviour
     Rigidbody rb;
 
     Script_Enemy script_Enemy;
+    Script_StackController script_StackController;
 
     void Start()
     {
         animator = transform.GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
+        script_StackController = GetComponent<Script_StackController>();
     }
 
     void Update()
@@ -38,9 +40,18 @@ public class Script_Player : MonoBehaviour
         }
     }
 
+    public void Action_Collect()
+    {
+        script_StackController.Stack_Create();
+
+        Destroy(script_Enemy.gameObject);
+
+        Script_GameManager.instance.Area_Collect_Set(false);
+    }
+
     public void Action_Punch()
     {
-        script_Enemy.TakePunch(punchForce);
+        script_Enemy.TakePunch(punchForce, script_Enemy.transform.position - transform.position);
 
         Script_GameManager.instance.Area_Punch_Set(false);
     }
@@ -55,6 +66,12 @@ public class Script_Player : MonoBehaviour
     {
         Debug.Log(other.tag);
 
+        if (other.CompareTag("Area_Collect"))
+        {
+            Script_GameManager.instance.Area_Collect_Set(true);
+
+            script_Enemy = other.GetComponentInParent<Script_Enemy>();
+        }
         if (other.CompareTag("Area_Punch"))
         {
             Script_GameManager.instance.Area_Punch_Set(true);
@@ -69,6 +86,10 @@ public class Script_Player : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
+        if (other.CompareTag("Area_Collect"))
+        {
+            Script_GameManager.instance.Area_Collect_Set(false);
+        }
         if (other.CompareTag("Area_Punch"))
         {
             Script_GameManager.instance.Area_Punch_Set(false);

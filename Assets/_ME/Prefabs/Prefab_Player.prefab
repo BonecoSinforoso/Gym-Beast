@@ -51,6 +51,7 @@ MonoBehaviour:
   rect_joy_front: {fileID: 0}
   rect_joy_back: {fileID: 0}
   moveSpeed: 5
+  punchForce: 200
   t_move: {fileID: 5193499364228586462}
 --- !u!114 &3173724425332545965
 MonoBehaviour:
@@ -64,11 +65,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb21d0d6d7b9e3d408e98040f24e1351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test: 0
   prefab_stack: {fileID: 8037737492105855096, guid: b038b780976ac1249aba4607d99ecf30,
     type: 3}
   list_t_stack: []
-  moveSpeed: 0
   followSpeed: 10
   pai_stack: {fileID: 0}
   t_back: {fileID: 5695246592886210797}

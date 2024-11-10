@@ -4,6 +4,8 @@ public class Script_Enemy : MonoBehaviour
 {
     [SerializeField] Rigidbody[] rb_ragdool;
     [SerializeField] Collider[] col_ragdoll;
+    [SerializeField] Collider col_collect;
+    [SerializeField] Collider col_punch;
 
     [SerializeField] Animator animator;
 
@@ -21,12 +23,16 @@ public class Script_Enemy : MonoBehaviour
         rb_ragdool[0].AddForce(Vector3.zero, ForceMode.Impulse);
     }
 
-    public void TakePunch(float _punchForce)
+    public void TakePunch(float _punchForce, Vector3 _dir)
     {
         animator.enabled = false;
+        col_collect.enabled = true;
+        col_punch.enabled = false;
+
         Ragdoll_Set(true);
 
-        rb_ragdool[0].AddForce(Vector3.forward * _punchForce, ForceMode.Impulse);
+        //rb_ragdool[0].AddForce(Vector3.forward * _punchForce, ForceMode.Impulse);
+        rb_ragdool[0].AddForce(_dir.normalized * _punchForce, ForceMode.Impulse);
     }
 
     void Ragdoll_Set(bool _value)
