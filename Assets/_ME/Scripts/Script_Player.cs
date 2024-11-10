@@ -6,6 +6,7 @@ public class Script_Player : MonoBehaviour
     [SerializeField] RectTransform rect_joy_back;
 
     [SerializeField] float moveSpeed;
+    [SerializeField] float punchForce;
 
     [SerializeField] Transform t_move;
     Animator animator;
@@ -39,7 +40,7 @@ public class Script_Player : MonoBehaviour
 
     public void Action_Punch()
     {
-        script_Enemy.Teste();
+        script_Enemy.TakePunch(punchForce);
 
         Script_GameManager.instance.Area_Punch_Set(false);
     }
