@@ -9,12 +9,17 @@ public class Script_Enemy : MonoBehaviour
 
     [SerializeField] Animator animator;
 
+    int index;
+    public int Index { get { return index; } set { index = value; } }
+
     void Start()
     {
         Ragdoll_Set(false);
 
         animator.SetInteger("_value", Random.Range(0, 3));
     }
+
+
 
     [SinforosoButton]
     void TakePunch()
@@ -33,7 +38,6 @@ public class Script_Enemy : MonoBehaviour
 
         Ragdoll_Set(true);
 
-        //rb_ragdool[0].AddForce(Vector3.forward * _punchForce, ForceMode.Impulse);
         rb_ragdool[0].AddForce(_dir.normalized * _punchForce, ForceMode.Impulse);
     }
 

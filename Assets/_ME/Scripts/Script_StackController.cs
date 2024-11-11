@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Script_StackController : MonoBehaviour
 {
+    #region variaveis
     [SerializeField] GameObject prefab_stack;
     [SerializeField] List<Transform> list_t_stack;
     [SerializeField] float followSpeed;
@@ -12,6 +13,7 @@ public class Script_StackController : MonoBehaviour
 
     int quant_current = 0;
     int quant_max = 3;
+    #endregion
 
     void Start()
     {
@@ -25,13 +27,16 @@ public class Script_StackController : MonoBehaviour
             Vector3 _targetPos = t_back.position + Vector3.up * i;
             float _individualSpeed = followSpeed / (i + 1);
 
-            list_t_stack[i].position = Vector3.Lerp(list_t_stack[i].position, _targetPos, _individualSpeed * Time.deltaTime);
-            list_t_stack[i].eulerAngles = t_back.eulerAngles;
+            if (Vector3.Distance(list_t_stack[i].position, _targetPos) > 0.1f)
+            {
+                list_t_stack[i].position = Vector3.Lerp(list_t_stack[i].position, _targetPos, _individualSpeed * Time.deltaTime);
+                list_t_stack[i].eulerAngles = t_back.eulerAngles;
+            }
         }
     }
 
     [SinforosoButton]
-    public void Stack_Create()
+    public bool Stack_Create()
     {
         if (quant_current < quant_max)
         {
@@ -43,11 +48,13 @@ public class Script_StackController : MonoBehaviour
 
             quant_current++;
             Script_GameManager.instance.Txt_Stack_Set(quant_current, quant_max);
+            return true;
         }
         else
         {
             Debug.Log("ja esta carregando a quantidade maxima");
-        }        
+            return false;
+        }
     }
 
     public void Call_ThrowRoutine()
@@ -70,7 +77,7 @@ public class Script_StackController : MonoBehaviour
             Script_GameManager.instance.Player_Money_Set(10);
 
             Script_GameManager.instance.Ac_Money_Play();
-            
+
             yield return new WaitForSeconds(0.1f);
 
             Destroy(list_t_stack[i].gameObject, 0.1f * list_t_stack.Count + (0.1f * i));

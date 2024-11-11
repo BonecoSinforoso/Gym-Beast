@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Script_Player : MonoBehaviour
 {
@@ -66,10 +67,12 @@ public class Script_Player : MonoBehaviour
     #region acoes chamadas pelos botoes
     public void Action_Collect()
     {
-        script_StackController.Stack_Create();
-
-        Script_GameManager.instance.Area_Collect_Set(false);
-        Destroy(script_Enemy.gameObject);
+        if (script_StackController.Stack_Create())
+        {
+            Script_GameManager.instance.Area_Collect_Set(false);
+            StartCoroutine(Script_GameManager.instance.Call_Enemy_Spawn(script_Enemy.Index));
+            Destroy(script_Enemy.gameObject);
+        }        
     }
 
     public void Action_Punch()

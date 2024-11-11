@@ -1,9 +1,11 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class Script_GameManager : MonoBehaviour
 {
+    #region variaveis
     public static Script_GameManager instance;
 
     [SerializeField] AudioClip[] ac_button;
@@ -11,6 +13,11 @@ public class Script_GameManager : MonoBehaviour
     [SerializeField] int fps_target;
     [SerializeField] float cam_moveSpeed;
     [SerializeField] int player_money;
+
+    [Header("Inimigo")]
+    [SerializeField] GameObject prefab_enemy;
+    [SerializeField] Transform[] t_enemySpawn;
+    [SerializeField] Transform parent_enemies;
 
     [Header("Textos")]
     [SerializeField] TextMeshProUGUI txt_fps;
@@ -30,6 +37,7 @@ public class Script_GameManager : MonoBehaviour
     Transform t_cam;
     Transform t_player;
     AudioSource audioSource;
+    #endregion
 
     void Start()
     {
@@ -45,7 +53,10 @@ public class Script_GameManager : MonoBehaviour
         Area_Punch_Set(false);
         Area_Throw_Set(false);
 
+        Txt_Money_Set();
         Txt_Upgrade_Set();
+
+        for (int i = 0; i < t_enemySpawn.Length; i++) Enemy_Spawn(i);
     }
 
     void Update()
@@ -53,6 +64,20 @@ public class Script_GameManager : MonoBehaviour
         Txt_Fps_Set();
 
         t_cam.position = Vector3.Lerp(t_cam.position, t_player.position, cam_moveSpeed * Time.deltaTime);
+    }
+
+    public IEnumerator Call_Enemy_Spawn(int _index, float _delay = 10f)
+    {
+        yield return new WaitForSeconds(_delay);
+
+        Enemy_Spawn(_index);
+    }
+
+    void Enemy_Spawn(int _index)
+    {
+        GameObject _go_enemy = Instantiate(prefab_enemy, t_enemySpawn[_index].position, Quaternion.Euler(0, 180, 0));
+        _go_enemy.transform.parent = parent_enemies;
+        _go_enemy.GetComponent<Script_Enemy>().Index = _index;
     }
 
     public void Player_Money_Set(int _value)
@@ -70,6 +95,7 @@ public class Script_GameManager : MonoBehaviour
         Upgrade_Check();
     }
 
+    #region audios
     public void Ac_Button_Play()
     {
         Script_Util.AudioSource_Play(audioSource, ac_button);
@@ -79,6 +105,7 @@ public class Script_GameManager : MonoBehaviour
     {
         Script_Util.AudioSource_Play(audioSource, ac_money);
     }
+    #endregion
 
     #region textos
     void Txt_Fps_Set()
@@ -88,7 +115,7 @@ public class Script_GameManager : MonoBehaviour
 
     void Txt_Money_Set()
     {
-        txt_money.text = player_money.ToString();
+        txt_money.text = "$" + player_money.ToString();
     }
 
     public void Txt_Stack_Set(int _current, int _max)
@@ -127,10 +154,8 @@ public class Script_GameManager : MonoBehaviour
     #region upgrade
     public void Upgrade_Buy(int _index)
     {
-        player_money -= upgrade[_index].price;
+        Player_Money_Set(-upgrade[_index].price);
         Ac_Money_Play();
-
-        Txt_Money_Set();
 
         switch (_index)
         {
